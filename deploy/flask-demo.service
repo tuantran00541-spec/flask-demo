@@ -1,0 +1,12 @@
+[Unit]
+Description=Flask demo app (Jenkins CI/CD - Nhom 3GIT)
+After=network.target
+
+[Service]
+User=jenkins
+WorkingDirectory=/var/lib/jenkins/workspace/flask-demo
+ExecStart=/var/lib/jenkins/workspace/flask-demo/venv/bin/python app.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
