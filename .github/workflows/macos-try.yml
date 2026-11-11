@@ -1,0 +1,26 @@
+name: Try macOS runner (tmate)
+# Mở một máy macOS của GitHub (macos-latest, M1) rồi cho SSH vào bằng tmate
+# để xem thử trực tiếp. Chạy tay: Actions -> Try macOS runner -> Run workflow,
+# hoặc: gh workflow run macos-try.yml
+# Lấy chuỗi SSH trong log của step "Open tmate session" rồi chạy trên máy mình.
+# Kết thúc: gõ exit trong SSH, hoặc Cancel run. Job tự hết sau 60 phút.
+on:
+  workflow_dispatch:
+
+jobs:
+  macos:
+    runs-on: macos-latest
+    timeout-minutes: 60
+    steps:
+      - name: System info
+        run: |
+          sw_vers
+          sysctl -n machdep.cpu.brand_string
+          sysctl -n hw.ncpu
+          sysctl hw.memsize
+          df -h /
+          whoami
+          hostname
+
+      - name: Open tmate session
+        uses: mxschmitt/action-tmate@v3
