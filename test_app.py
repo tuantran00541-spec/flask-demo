@@ -40,5 +40,5 @@ def test_api_sum_invalid(client):
 # ===== KỊCH BẢN DEMO 2: PIPELINE THẤT BẠI =====
 # Bỏ dấu # ở 2 dòng dưới rồi push lên GitHub.
 # Stage Test sẽ báo đỏ, pipeline dừng lại và KHÔNG triển khai.
-# def test_demo_fail():
-#     assert add(2, 2) == 5
+def test_demo_fail():
+    assert add(2, 2) == 5
