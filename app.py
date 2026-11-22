@@ -5,7 +5,7 @@ app = Flask(__name__)
 app.json.ensure_ascii = False  # hiển thị tiếng Việt có dấu trên trình duyệt
 
 # Khi demo: sửa dòng này rồi push lên GitHub để thấy Jenkins tự triển khai bản mới
-APP_VERSION = "1.0.0"
+APP_VERSION = "1.1.0"
 MESSAGE = "Xin chào từ Jenkins CI/CD - Nhóm 3GIT!"
 
 
