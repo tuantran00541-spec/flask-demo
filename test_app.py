@@ -37,6 +37,15 @@ def test_api_sum_invalid(client):
     assert res.status_code == 400
 
 
+@pytest.mark.parametrize(
+    ("a", "b"), [("NaN", "1"), ("1", "Infinity"), ("1e308", "1e308")]
+)
+def test_api_sum_nonfinite(client, a, b):
+    res = client.get("/api/sum", query_string={"a": a, "b": b})
+    assert res.status_code == 400
+    assert "error" in res.get_json()
+
+
 # ===== KỊCH BẢN DEMO 2: PIPELINE THẤT BẠI =====
 # Bỏ dấu # ở 2 dòng dưới rồi push lên GitHub.
 # Stage Test sẽ báo đỏ, pipeline dừng lại và KHÔNG triển khai.

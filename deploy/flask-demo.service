@@ -1,12 +1,16 @@
 [Unit]
 Description=Flask demo app (Jenkins CI/CD - Nhom 3GIT)
 After=network.target
+ConditionPathIsDirectory=/opt/flask-demo/current
 
 [Service]
+Type=notify
 User=jenkins
-WorkingDirectory=/var/lib/jenkins/workspace/flask-demo
-ExecStart=/var/lib/jenkins/workspace/flask-demo/venv/bin/python app.py
+WorkingDirectory=/opt/flask-demo/current
+ExecStart=/opt/flask-demo/current/venv/bin/python -m gunicorn --preload --no-control-socket --bind 0.0.0.0:5000 app:app
+TimeoutStartSec=20s
 Restart=on-failure
+RestartSec=3s
 
 [Install]
 WantedBy=multi-user.target

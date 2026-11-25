@@ -1,4 +1,6 @@
 """Ứng dụng Flask mẫu cho demo CI/CD với Jenkins (Đề tài 37 - Nhóm 3GIT)."""
+from math import isfinite
+
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
@@ -31,7 +33,10 @@ def api_sum():
         b = float(request.args.get("b", 0))
     except ValueError:
         return jsonify(error="a và b phải là số"), 400
-    return jsonify(a=a, b=b, result=add(a, b))
+    result = add(a, b)
+    if not isfinite(result):
+        return jsonify(error="a, b và kết quả phải là số hữu hạn"), 400
+    return jsonify(a=a, b=b, result=result)
 
 
 if __name__ == "__main__":
